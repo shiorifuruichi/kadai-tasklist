@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
     def index
-        @task = Task.all
+        @task = Task.all.page(params[:page])
     end
     
     def show
@@ -54,6 +54,6 @@ class TasksController < ApplicationController
     end
     
     def task_params
-        params_require(:task).permit(:content)
+        params.require(:task).permit(:content, :title)
     end
 end
